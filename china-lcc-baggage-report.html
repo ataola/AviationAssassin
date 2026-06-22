@@ -1,0 +1,1079 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>中国低成本航空行李规则报告页</title>
+  <style>
+    :root {
+      --paper: #f7f4ee;
+      --ink: #1a2233;
+      --muted: #637087;
+      --line: #d6dbe6;
+      --navy: #12314f;
+      --sky: #dbeefe;
+      --blue: #2674d9;
+      --gold: #d8892c;
+      --amber: #fff1de;
+      --mint: #e9f9f2;
+      --rose: #fff0f0;
+      --card: rgba(255, 255, 255, 0.86);
+      --shadow: 0 18px 40px rgba(19, 34, 54, 0.08);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(49, 125, 214, 0.18), transparent 36%),
+        radial-gradient(circle at 88% 12%, rgba(216, 137, 44, 0.12), transparent 26%),
+        linear-gradient(180deg, #eef6ff 0%, var(--paper) 30%, #f7f4ee 100%);
+      font-family: "HarmonyOS Sans SC", "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.65;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(18, 49, 79, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(18, 49, 79, 0.03) 1px, transparent 1px);
+      background-size: 30px 30px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.42), transparent 78%);
+    }
+
+    a { color: var(--blue); }
+
+    .wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 28px 20px 64px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 34px 34px 28px;
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      border-radius: 32px;
+      background:
+        linear-gradient(135deg, rgba(9, 35, 64, 0.92), rgba(30, 92, 162, 0.88)),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0));
+      color: #f7fbff;
+      box-shadow: 0 26px 60px rgba(17, 42, 70, 0.22);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -90px;
+      top: -90px;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.22), transparent 62%);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .doc-rail {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .doc-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      font-size: 12px;
+      color: rgba(247, 251, 255, 0.92);
+    }
+
+    h1, h2, h3, h4 {
+      margin: 0;
+      font-family: "Source Han Serif SC", "Noto Serif SC", "Songti SC", serif;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    h1 {
+      margin-top: 16px;
+      font-size: clamp(32px, 4vw, 54px);
+      line-height: 1.08;
+      max-width: 10.5em;
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: 16px 0 0;
+      color: rgba(247, 251, 255, 0.84);
+      font-size: 16px;
+    }
+
+    .hero-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .hero-links a {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: #f7fbff;
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 0.9fr;
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .hero-panel,
+    .section,
+    .card,
+    .spotlight,
+    .table-wrap {
+      border-radius: var(--radius);
+      background: var(--card);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.52);
+    }
+
+    .hero-panel {
+      padding: 18px 20px;
+      color: #f7fbff;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: none;
+    }
+
+    .bag-visual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .bag-box {
+      padding: 16px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      text-align: center;
+    }
+
+    .bag-box svg {
+      width: 100%;
+      max-width: 220px;
+      height: auto;
+    }
+
+    .bag-box strong {
+      display: block;
+      margin-top: 10px;
+      font-size: 15px;
+    }
+
+    .bag-box span {
+      display: block;
+      color: rgba(247, 251, 255, 0.78);
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin: 22px 0 0;
+    }
+
+    .stat {
+      padding: 16px 18px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+    }
+
+    .stat b {
+      display: block;
+      font-size: 28px;
+      line-height: 1.1;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .section {
+      padding: 26px;
+      margin-top: 22px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: end;
+      margin-bottom: 18px;
+    }
+
+    .section-head p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      max-width: 740px;
+    }
+
+    .chips,
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chip,
+    .legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      color: var(--navy);
+      background: #f0f6ff;
+      border: 1px solid #d6e5fa;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .risk-high { background: #ef4444; }
+    .risk-mid { background: #f59e0b; }
+    .risk-low { background: #16a34a; }
+    .risk-var { background: #2674d9; }
+
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .card {
+      padding: 18px;
+    }
+
+    .card h4 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .card p,
+    .card li,
+    .section li,
+    .section td,
+    .section th {
+      font-size: 14px;
+    }
+
+    .card ul,
+    .section ul {
+      margin: 10px 0 0 18px;
+      padding: 0;
+    }
+
+    .emphasis {
+      border-left: 4px solid var(--gold);
+      background: linear-gradient(180deg, var(--amber), rgba(255, 241, 222, 0.6));
+    }
+
+    .mini-matrix {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .mini-cell {
+      padding: 12px 10px;
+      border-radius: 18px;
+      background: #fff;
+      border: 1px solid var(--line);
+      text-align: center;
+    }
+
+    .mini-cell b {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 8px;
+      color: var(--navy);
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .pill.high { background: #dc2626; }
+    .pill.mid { background: #d97706; }
+    .pill.low { background: #15803d; }
+    .pill.var { background: #2563eb; }
+
+    .bar-chart {
+      display: grid;
+      gap: 14px;
+      margin-top: 6px;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 120px 1fr 56px;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .bar-track {
+      height: 14px;
+      border-radius: 999px;
+      background: #eef2f8;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #2674d9, #65a7ff);
+    }
+
+    .bar-fill.warn { background: linear-gradient(90deg, #d97706, #f6ad38); }
+    .bar-fill.danger { background: linear-gradient(90deg, #dc2626, #f87171); }
+    .bar-fill.safe { background: linear-gradient(90deg, #15803d, #4ade80); }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .step {
+      position: relative;
+      padding: 16px;
+      border-radius: 20px;
+      background: #fff;
+      border: 1px solid var(--line);
+      min-height: 140px;
+    }
+
+    .step b {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: #fff;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      min-width: 940px;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 14px 12px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      text-align: left;
+    }
+
+    th {
+      position: sticky;
+      top: 0;
+      background: rgba(239, 246, 255, 0.96);
+      color: var(--navy);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    .spotlight {
+      margin-top: 22px;
+      padding: 24px;
+      background:
+        linear-gradient(180deg, rgba(255, 245, 230, 0.96), rgba(255, 255, 255, 0.96));
+      border: 1px solid #f2d4ac;
+    }
+
+    .spotlight-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .price-ladder {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .ladder-row {
+      display: grid;
+      grid-template-columns: 100px 1fr 1fr;
+      gap: 10px;
+      align-items: center;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid #f3d8b0;
+    }
+
+    .sheet-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .sheet {
+      padding: 18px;
+      border-radius: 20px;
+      background: #fff;
+      border: 1px solid var(--line);
+    }
+
+    .sheet p {
+      margin: 10px 0 0;
+      color: var(--muted);
+    }
+
+    .source-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 18px;
+      margin-top: 16px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .source-list li {
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: #f7fbff;
+      border: 1px solid #d8e7fb;
+      color: var(--muted);
+      word-break: break-all;
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .pub-footer {
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, #f7fbff, #ffffff);
+      border: 1px solid #d8e7fb;
+      box-shadow: 0 12px 28px rgba(38, 116, 217, 0.08);
+    }
+
+    .pub-footer-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .pub-footer-head h4 {
+      font-size: 18px;
+      color: var(--navy);
+    }
+
+    .pub-caption {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .pub-stamp {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #e8f1ff;
+      border: 1px solid #d5e5ff;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .pub-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .pub-item {
+      padding: 14px;
+      border-radius: 18px;
+      background: #fff;
+      border: 1px solid #e2ebf7;
+    }
+
+    .pub-item b {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+
+    .pub-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .grid-4,
+      .grid-3,
+      .spotlight-grid,
+      .sheet-grid,
+      .source-list,
+      .flow,
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .mini-matrix {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .wrap { padding: 16px 12px 40px; }
+      .hero { padding: 24px 20px; border-radius: 24px; }
+      .hero-grid,
+      .grid-4,
+      .grid-3,
+      .grid-2,
+      .spotlight-grid,
+      .sheet-grid,
+      .source-list,
+      .flow,
+      .stats,
+      .bag-visual {
+        grid-template-columns: 1fr;
+      }
+      .section { padding: 20px 16px; }
+      .section-head { display: block; }
+      .mini-matrix { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .bar-row { grid-template-columns: 92px 1fr 44px; }
+      .ladder-row { grid-template-columns: 1fr; }
+      .pub-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="hero-meta">
+        <div class="eyebrow">Airplane / Report / 2026-06</div>
+        <div class="doc-rail">
+          <span class="doc-pill">专题：中国低成本航空</span>
+          <span class="doc-pill">文档编号：AIRPLANE-CN-LCC-REPORT-2026.06</span>
+          <span class="doc-pill">版本：v1.1</span>
+        </div>
+      </div>
+      <h1>中国境内低成本航空<br />行李规则报告页</h1>
+      <p>这版不是简单表格，而是按“最低价票真正会踩什么坑”来重构。重点看三件事：是否默认 0kg 托运、是否只有小尺寸随身行李、以及登机口/机场临时补价会不会突然很贵。</p>
+      <div class="hero-links">
+        <a href="#overview">看总览</a>
+        <a href="#matrix">看对照矩阵</a>
+        <a href="#tianjin">看天津航空单独页</a>
+        <a href="lowest-fare-baggage-cheatsheet.html">跳转极简避坑页</a>
+      </div>
+
+      <div class="hero-grid">
+        <div class="hero-panel">
+          <h3>20 寸箱与“小包”不是一回事</h3>
+          <p>很多低成本票的真正默认配置，不是你脑子里那个 20 寸登机箱，而是一个更小的随身包。买票时不分清这一点，到机场才最容易被补价。</p>
+          <div class="bag-visual">
+            <div class="bag-box">
+              <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="50" y="26" width="100" height="108" rx="16" stroke="white" stroke-width="6" opacity="0.95"/>
+                <path d="M78 28V18C78 11.3726 83.3726 6 90 6H110C116.627 6 122 11.3726 122 18V28" stroke="white" stroke-width="6" opacity="0.95"/>
+                <path d="M74 58H126" stroke="white" stroke-width="6" stroke-linecap="round" opacity="0.7"/>
+                <path d="M74 84H126" stroke="white" stroke-width="6" stroke-linecap="round" opacity="0.45"/>
+                <path d="M74 110H112" stroke="white" stroke-width="6" stroke-linecap="round" opacity="0.3"/>
+              </svg>
+              <strong>小尺寸随身包</strong>
+              <span>常见 20×30×40cm / 7kg</span>
+            </div>
+            <div class="bag-box">
+              <svg viewBox="0 0 220 170" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="55" y="18" width="110" height="134" rx="16" stroke="white" stroke-width="6" opacity="0.95"/>
+                <path d="M85 20V10C85 4.47715 89.4772 0 95 0H125C130.523 0 135 4.47715 135 10V20" stroke="white" stroke-width="6" opacity="0.95"/>
+                <circle cx="78" cy="155" r="7" fill="white" opacity="0.85"/>
+                <circle cx="142" cy="155" r="7" fill="white" opacity="0.85"/>
+                <path d="M80 52H140" stroke="white" stroke-width="6" stroke-linecap="round" opacity="0.7"/>
+                <path d="M80 84H140" stroke="white" stroke-width="6" stroke-linecap="round" opacity="0.45"/>
+                <path d="M80 116H128" stroke="white" stroke-width="6" stroke-linecap="round" opacity="0.3"/>
+              </svg>
+              <strong>标准 20 寸登机箱</strong>
+              <span>常见 20×40×55cm / 7-10kg</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-panel">
+          <h3>最快判断法</h3>
+          <ul>
+            <li>看到低价舱先默认它 <b>不送托运</b>，再去出票页核。</li>
+            <li>看到“免费手提”不要直接理解成“20 寸箱可上机”。</li>
+            <li>遇到天津、西部、长安这类差异化产品，机场临时买往往最亏。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="overview">
+      <div class="section-head">
+        <div>
+          <h2>执行摘要</h2>
+          <p>本次按保守可验证口径收 7 家样本。严格意义上最纯粹的“付费托运”代表是九元；最像“差异化服务 + 低价 0kg 托运”的，是天津、西部、祥鹏、长安。</p>
+        </div>
+        <div class="chips">
+          <span class="chip"><span class="dot risk-high"></span>高风险：默认先按 0kg 托运处理</span>
+          <span class="chip"><span class="dot risk-var"></span>条件型：看舱位/航线/产品</span>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><b>7</b><span>当前纳入样本航司</span></div>
+        <div class="stat"><b>5</b><span>最低价票常见 0kg 托运的航司数</span></div>
+        <div class="stat"><b>300元/件</b><span>天津、西部典型登机口超规处理量级</span></div>
+        <div class="stat"><b>159元/航段</b><span>春秋升级手提的关键记忆点</span></div>
+      </div>
+
+      <div class="grid-2" style="margin-top: 18px;">
+        <div class="card emphasis">
+          <h4>结论 1：最低价票最容易踩坑的是托运，不是票价本身</h4>
+          <p>天津、西部、祥鹏、长安、九元这 5 家，最低价票经常直接把免费托运行李压到 0kg。你以为自己买的是“便宜票”，实际是把成本后移到行李。</p>
+        </div>
+        <div class="card emphasis">
+          <h4>结论 2：免费手提 ≠ 标准登机箱</h4>
+          <p>天津、长安、西部部分低价产品，默认上机规格更接近小包而不是 20 寸箱。春秋则是另一种路径：可免费手提，但想稳定带登机箱上机，常要买升级手提。</p>
+        </div>
+      </div>
+
+      <div class="grid-2" style="margin-top: 16px;">
+        <div class="card">
+          <h4>最低价票托运风险分布</h4>
+          <div class="bar-chart">
+            <div class="bar-row">
+              <span>高风险</span>
+              <div class="bar-track"><div class="bar-fill danger" style="width: 71%;"></div></div>
+              <b>5</b>
+            </div>
+            <div class="bar-row">
+              <span>条件型</span>
+              <div class="bar-track"><div class="bar-fill warn" style="width: 29%;"></div></div>
+              <b>2</b>
+            </div>
+            <div class="bar-row">
+              <span>低风险</span>
+              <div class="bar-track"><div class="bar-fill safe" style="width: 0%;"></div></div>
+              <b>0</b>
+            </div>
+          </div>
+          <p>这里的“高风险”意思是：最低价票常态下，你应该先假设自己没有免费托运，再去出票页找例外。</p>
+        </div>
+
+        <div class="card">
+          <h4>你最该记住的 4 个补价触发器</h4>
+          <ul>
+            <li><b>春秋：</b>20 寸箱想稳妥上机，常见触发点是 <b>159 元/航段升级手提</b>。</li>
+            <li><b>天津：</b>最低价舱常见 <b>0kg 托运</b>，登机口超规 <b>300 元/件</b>。</li>
+            <li><b>中联航：</b>额外 23kg 内托运行李常见 <b>90 元/件</b>，重件再加 <b>60 元/件</b>。</li>
+            <li><b>西部/长安：</b>机场常按 <b>元/kg</b> 结算，航距越长越贵。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="matrix">
+      <div class="section-head">
+        <div>
+          <h2>最低价票对照矩阵</h2>
+          <p>这一张表就是“你买到最低价票时，大概率会面对什么”。为了好记，我把结论压成一句话而不是复读官网原文。</p>
+        </div>
+        <div class="legend">
+          <span><i class="dot risk-high"></i> 高风险</span>
+          <span><i class="dot risk-mid"></i> 中风险</span>
+          <span><i class="dot risk-var"></i> 条件型</span>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>航司</th>
+              <th>归类</th>
+              <th>最低价票手提/登机</th>
+              <th>最低价票托运</th>
+              <th>你最该记住的收费点</th>
+              <th>风险判断</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>春秋航空</b></td>
+              <td>春秋集团</td>
+              <td>有免费手提，但 20 寸箱想上机常要额外升级</td>
+              <td>按产品和购买页动态显示</td>
+              <td>升级手提 <b>159元/航段</b>；托运按 5kg 档位预购</td>
+              <td><span class="pill mid">中风险</span></td>
+            </tr>
+            <tr>
+              <td><b>中国联合航空</b></td>
+              <td>东航系低成本模式</td>
+              <td>至少 1 件随身软包，常见产品另含 1 件手提箱</td>
+              <td>看产品；低价产品可能无免费托运</td>
+              <td>23kg 内付费托运常见 <b>90元/件</b>；重件加 <b>60元</b></td>
+              <td><span class="pill var">条件型</span></td>
+            </tr>
+            <tr>
+              <td><b>天津航空</b></td>
+              <td>海航系差异化</td>
+              <td>普通经济舱常见 <b>20×30×40cm / 7kg</b></td>
+              <td>低价舱常见 <b>0kg</b></td>
+              <td>预购 10kg 起；登机口超规 <b>300元/件</b></td>
+              <td><span class="pill high">高风险</span></td>
+            </tr>
+            <tr>
+              <td><b>西部航空</b></td>
+              <td>海航系差异化</td>
+              <td>低价产品多为小尺寸 7kg 手提</td>
+              <td>低价舱常见 <b>0kg</b></td>
+              <td>机场柜台常按 <b>8/16/18元/kg</b>；登机口 <b>300元/件</b></td>
+              <td><span class="pill high">高风险</span></td>
+            </tr>
+            <tr>
+              <td><b>祥鹏航空</b></td>
+              <td>海航系差异化</td>
+              <td>通常保留基础免费携带，具体看出票页</td>
+              <td>差异化航线最低价舱常见 <b>0kg</b></td>
+              <td>不是统一静态价目表，需看行李预购页</td>
+              <td><span class="pill high">高风险</span></td>
+            </tr>
+            <tr>
+              <td><b>长安航空</b></td>
+              <td>海航系差异化</td>
+              <td>普通经济舱常见 <b>20×40×30cm / 7kg</b></td>
+              <td>低价舱常见 <b>0kg</b></td>
+              <td>优惠超限常按 <b>12/16/20元/kg</b></td>
+              <td><span class="pill high">高风险</span></td>
+            </tr>
+            <tr>
+              <td><b>九元航空</b></td>
+              <td>独立小型廉航</td>
+              <td>1 件 7kg 免费上机，小件友好</td>
+              <td><b>无免费托运</b></td>
+              <td>最纯粹的付费托运逻辑</td>
+              <td><span class="pill high">高风险</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mini-matrix">
+        <div class="mini-cell"><b>春秋</b><span class="pill mid">20寸箱常付费</span></div>
+        <div class="mini-cell"><b>中联航</b><span class="pill var">看产品</span></div>
+        <div class="mini-cell"><b>天津</b><span class="pill high">0kg常见</span></div>
+        <div class="mini-cell"><b>西部</b><span class="pill high">0kg常见</span></div>
+        <div class="mini-cell"><b>祥鹏</b><span class="pill high">看航线也看舱位</span></div>
+        <div class="mini-cell"><b>长安</b><span class="pill high">小包+0kg常见</span></div>
+        <div class="mini-cell"><b>九元</b><span class="pill high">托运默认收费</span></div>
+      </div>
+    </section>
+
+    <section class="spotlight" id="tianjin">
+      <div class="section-head">
+        <div>
+          <h2>天津航空单独聚焦</h2>
+          <p>你要求单列，这家也确实值得单列。它把低价票的“免费托运缩水、小尺寸手提、登机口高额补价”这三件事，做得非常典型。</p>
+        </div>
+      </div>
+
+      <div class="spotlight-grid">
+        <div>
+          <div class="card">
+            <h4>为什么它最值得单独看</h4>
+            <ul>
+              <li>最低价经济舱 <b>V/N/A/A1/U/U1/T/T1</b> 常见直接 <b>0kg 免费托运</b>。</li>
+              <li>普通经济舱上机规格常见只给 <b>20×30×40cm / 7kg</b>，不是默认 20 寸箱。</li>
+              <li>如果把超规箱子直接拖到登机口，规则里最醒目的数字就是 <b>300元/件</b>。</li>
+            </ul>
+          </div>
+
+          <div class="price-ladder">
+            <div class="ladder-row"><b>10kg</b><span>官网 / 微信 / APP：<b>80元</b></span><span>95350：<b>90元</b></span></div>
+            <div class="ladder-row"><b>20kg</b><span>官网 / 微信 / APP：<b>160元</b></span><span>95350：<b>180元</b></span></div>
+            <div class="ladder-row"><b>30kg</b><span>官网 / 微信 / APP：<b>240元</b></span><span>95350：<b>270元</b></span></div>
+            <div class="ladder-row"><b>40kg</b><span>官网 / 微信 / APP：<b>320元</b></span><span>95350：<b>360元</b></span></div>
+          </div>
+        </div>
+
+        <div>
+          <div class="card emphasis">
+            <h4>最直接的行动建议</h4>
+            <ul>
+              <li>买到天津最低价票，就先假设自己没有托运额。</li>
+              <li>如果行李接近 20 寸登机箱，不要到现场赌。</li>
+              <li>能提前买就提前买，别把问题留到登机口。</li>
+            </ul>
+          </div>
+
+          <div class="card" style="margin-top: 16px;">
+            <h4>现场补价逻辑</h4>
+            <p><b>机场柜台：</b>按同航段机票全价的 <b>1.5% / kg</b> 计算，并设置 <b>20元/kg</b> 封顶单价。</p>
+            <p><b>登机口：</b>超规行李 <b>300元/件</b>，收费后机下托运。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="airlines">
+      <div class="section-head">
+        <div>
+          <h2>逐家说明</h2>
+          <p>完整版信息依然保留，但换成更像报告摘要的写法。每张卡只保留真正有用的结论、数字和例外。</p>
+        </div>
+      </div>
+
+      <div class="sheet-grid">
+        <article class="sheet">
+          <h3>春秋航空</h3>
+          <ul>
+            <li>免费手提存在，不是“完全不给上机行李”。</li>
+            <li>关键不是有没有免费手提，而是 <b>20 寸箱能不能按你想象那样上机</b>。</li>
+            <li>国内航线升级手提公开价：<b>159元/人/航段</b>，升级后到 <b>20×40×55cm、10kg、1件</b>。</li>
+            <li>托运行李支持提前按 <b>5/10/15/20/30/40/50kg</b> 预购，但统一静态价目表不公开。</li>
+          </ul>
+          <p>结论：春秋更像“低票价 + 手提尺寸分层收费”。</p>
+        </article>
+
+        <article class="sheet">
+          <h3>中国联合航空</h3>
+          <ul>
+            <li>至少可免费带 <b>1 件随身软包</b>；多数常见舱位另带 1 件手提箱。</li>
+            <li>常规手提标准可见 <b>1件 8kg 20×40×55cm</b> 的规则口径。</li>
+            <li>低价产品可能无免费托运，但常见舱位也有 <b>1件 23kg</b> 的配置。</li>
+            <li>额外托运行李常见价：<b>90元/件</b>；23kg 以上重件另加 <b>60元/件</b>。</li>
+          </ul>
+          <p>结论：它是“低成本模式”里最不该一刀切理解的那家，产品差异很大。</p>
+        </article>
+
+        <article class="sheet">
+          <h3>西部航空</h3>
+          <ul>
+            <li>低价舱常见 <b>0kg 托运</b>。</li>
+            <li>低价产品常保留 <b>1件 7kg</b> 上机资格，但很多时候更接近小包规格。</li>
+            <li>机场柜台超重常按航距三档：<b>8 / 16 / 18 元/kg</b>。</li>
+            <li>国内规则公开摘要里，登机口超规处理常见 <b>300元/件</b>。</li>
+          </ul>
+          <p>结论：西部最典型的坑点是“票便宜，但现场补价不便宜”。</p>
+        </article>
+
+        <article class="sheet">
+          <h3>祥鹏航空</h3>
+          <ul>
+            <li>重点不在手提，而在 <b>差异化航线</b> 的托运额分层。</li>
+            <li>V/N/Q/A/U/T/P/F 等低价舱，在差异化服务航线常见 <b>0kg</b>。</li>
+            <li>G 舱 <b>10kg</b>；较高经济舱常见 <b>20kg</b>；公务舱 <b>30kg</b>。</li>
+            <li>精品航线和部分未执行差异化服务航线，低价经济舱可能又恢复到 <b>20kg</b>。</li>
+          </ul>
+          <p>结论：祥鹏最怕“一概而论”，必须看具体航线是否执行差异化服务。</p>
+        </article>
+
+        <article class="sheet">
+          <h3>长安航空</h3>
+          <ul>
+            <li>普通经济舱手提常见 <b>20×40×30cm / 7kg</b>；超值经济舱可到 <b>20×40×55cm / 7kg</b>。</li>
+            <li>低价舱常见 <b>0kg 免费托运</b>。</li>
+            <li>优惠超限收费常按航距分档：<b>12 / 16 / 20 元/kg</b>。</li>
+            <li>婴儿无免费行李额，但有 1 件婴儿车/摇篮的免费携带或托运例外。</li>
+          </ul>
+          <p>结论：长安和天津、西部属于同一类阅读方法，先看自己是不是买到了“缩水票”。</p>
+        </article>
+
+        <article class="sheet">
+          <h3>九元航空</h3>
+          <ul>
+            <li>符合规则的非托运行李可免费运输，典型是 <b>1件 7kg</b>。</li>
+            <li>托运行李规则最直接：<b>无免费托运行李额</b>。</li>
+            <li>更像最纯粹的“小包免费、托运收费”模式。</li>
+            <li>单件托运行李通常不超过 <b>32kg</b>，尺寸不超过 <b>40×60×100cm</b>。</li>
+          </ul>
+          <p>结论：九元不用猜，默认把托运当增值服务就对了。</p>
+        </article>
+
+        <article class="sheet">
+          <h3>样本边界说明</h3>
+          <ul>
+            <li>这份报告只收 <b>官网仍能核出差异化售卖逻辑</b> 的航司。</li>
+            <li>没把运营状态不清、官网规则缺失、或只存在历史“廉航”称呼的对象硬塞进来。</li>
+            <li>价格字段优先写官网能静态核出的数字；无法静态核出的，就明确标为 <b>动态结算页为准</b>。</li>
+          </ul>
+          <p>结论：这不是“名单越长越好”，而是“名单越能验证越有用”。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="method">
+      <div class="section-head">
+        <div>
+          <h2>怎么用这份报告</h2>
+          <p>如果你只是实际买票，不需要背完规则，按下面 4 步走就够了。</p>
+        </div>
+      </div>
+
+      <div class="flow">
+        <div class="step">
+          <b>1</b>
+          <h4>先看舱位</h4>
+          <p>别只看票价，先确认自己买到的是哪种舱位或产品。很多坑都是舱位差异，不是航司统一规则。</p>
+        </div>
+        <div class="step">
+          <b>2</b>
+          <h4>再看手提尺寸</h4>
+          <p>看到“免费手提”时，先问一句：它到底是小包规格，还是 20 寸箱规格。</p>
+        </div>
+        <div class="step">
+          <b>3</b>
+          <h4>默认托运可能为 0kg</h4>
+          <p>天津、西部、祥鹏、长安、九元这些，低价票不核托运额就很容易误判。</p>
+        </div>
+        <div class="step">
+          <b>4</b>
+          <h4>能提前买就提前买</h4>
+          <p>尤其天津、西部、长安这类，机场和登机口的价格通常更伤，不值得赌。</p>
+        </div>
+      </div>
+
+      <ul class="source-list">
+        <li>春秋航空：<a href="https://flights.ch.com/baggage-rule">flights.ch.com/baggage-rule</a>；<a href="https://flights.ch.com/Baggage/BaggageCalculator">行李计算器</a></li>
+        <li>中国联合航空：<a href="https://info.flycua.com/jcms/publish/newb2c/xlysgz/index.html">国内行李规则</a>；<a href="https://info.flycua.com/jcms/publish/newb2c/serviceInformation/index.html">FAQ</a></li>
+        <li>祥鹏航空：<a href="https://www.luckyair.net/micro/main/help/641d4bbf230c607e69a9a9e4">托运行李规则</a></li>
+        <li>九元航空：<a href="https://www.9air.com/cmsProvider/dblm/cxzb/xlxz.htm">行李须知</a></li>
+        <li>西部航空：官网增值服务入口与公开规则摘要</li>
+        <li>长安航空：官网服务入口与公开 PDF 总条件</li>
+        <li>天津航空：公开规则文件与差异化行李规则摘要</li>
+        <li>说明：部分航司预购托运价为动态页面报价，报告内已明确标注不硬写统一价。</li>
+      </ul>
+
+      <p class="footer-note">报告版文件名建议长期保留：<b>china-lcc-baggage-report.html</b>。若后续还要扩到国际/地区航线，可在同目录继续做分卷。</p>
+
+      <div class="pub-footer">
+        <div class="pub-footer-head">
+          <h4>报告信息</h4>
+          <span class="pub-stamp">Publication Note</span>
+        </div>
+        <p class="pub-caption">文档编号：AIRPLANE-CN-LCC-REPORT-2026.06 · 版本：v1.1 · 主题：中国低成本航空</p>
+        <div class="pub-grid">
+          <div class="pub-item">
+            <b>制作日期</b>
+            <p>2026-06-22（Asia/Shanghai）</p>
+          </div>
+          <div class="pub-item">
+            <b>免责声明</b>
+            <p>本页为基于公开规则与官网可核信息整理的参考材料，不构成航司运输承诺、购票建议或赔付依据。实际免费行李额、加购价格、航线适用条件和现场执行口径，请以下单页、值机页与航司最新公告为准。</p>
+          </div>
+          <div class="pub-item">
+            <b>生成模型</b>
+            <p>gpt5.4</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

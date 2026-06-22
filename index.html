@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>中国低成本航空行李专题</title>
+  <style>
+    :root {
+      --bg: #eff5ff;
+      --ink: #172233;
+      --muted: #66758a;
+      --line: rgba(255, 255, 255, 0.34);
+      --blue: #2563eb;
+      --navy: #0f2744;
+      --gold: #f59e0b;
+      --paper: rgba(255, 255, 255, 0.9);
+      --shadow: 0 24px 60px rgba(15, 39, 68, 0.14);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: "HarmonyOS Sans SC", "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+      background:
+        radial-gradient(circle at 12% 10%, rgba(37, 99, 235, 0.22), transparent 26%),
+        radial-gradient(circle at 86% 12%, rgba(245, 158, 11, 0.18), transparent 20%),
+        linear-gradient(180deg, #eef6ff 0%, #f7fbff 42%, #fdfefe 100%);
+      overflow-x: hidden;
+    }
+
+    .shell {
+      position: relative;
+      min-height: 100vh;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(15, 39, 68, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15, 39, 68, 0.03) 1px, transparent 1px);
+      background-size: 24px 24px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.34), transparent 85%);
+    }
+
+    .word-cloud {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .word {
+      position: absolute;
+      white-space: nowrap;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      color: rgba(15, 39, 68, 0.10);
+    }
+
+    .word.soft { color: rgba(15, 39, 68, 0.07); }
+    .word.strong { color: rgba(15, 39, 68, 0.15); }
+    .word.blue { color: rgba(37, 99, 235, 0.12); }
+    .word.gold { color: rgba(245, 158, 11, 0.12); }
+
+    .w1 { top: 5%; left: 7%; font-size: 32px; transform: rotate(-11deg); }
+    .w2 { top: 7%; left: 28%; font-size: 20px; transform: rotate(8deg); }
+    .w3 { top: 8%; right: 12%; font-size: 28px; transform: rotate(10deg); }
+    .w4 { top: 16%; left: 55%; font-size: 22px; transform: rotate(-6deg); }
+    .w5 { top: 19%; left: 10%; font-size: 50px; transform: rotate(-14deg); }
+    .w6 { top: 22%; right: 9%; font-size: 46px; transform: rotate(13deg); }
+    .w7 { top: 28%; left: 34%; font-size: 24px; transform: rotate(5deg); }
+    .w8 { top: 34%; left: 4%; font-size: 40px; transform: rotate(-10deg); }
+    .w9 { top: 37%; right: 6%; font-size: 36px; transform: rotate(12deg); }
+    .w10 { top: 43%; left: 18%; font-size: 24px; transform: rotate(-4deg); }
+    .w11 { top: 46%; right: 31%; font-size: 22px; transform: rotate(8deg); }
+    .w12 { top: 52%; left: 6%; font-size: 52px; transform: rotate(-8deg); }
+    .w13 { top: 57%; right: 8%; font-size: 44px; transform: rotate(11deg); }
+    .w14 { top: 62%; left: 28%; font-size: 30px; transform: rotate(-12deg); }
+    .w15 { top: 68%; right: 30%; font-size: 26px; transform: rotate(7deg); }
+    .w16 { bottom: 18%; left: 10%; font-size: 46px; transform: rotate(-9deg); }
+    .w17 { bottom: 15%; left: 42%; font-size: 22px; transform: rotate(6deg); }
+    .w18 { bottom: 12%; right: 10%; font-size: 34px; transform: rotate(13deg); }
+    .w19 { bottom: 7%; left: 24%; font-size: 26px; transform: rotate(-7deg); }
+    .w20 { bottom: 5%; right: 28%; font-size: 20px; transform: rotate(5deg); }
+
+    .luggage-outline {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      opacity: 0.22;
+      z-index: 0;
+    }
+
+    .luggage-outline svg {
+      width: min(720px, 72vw);
+      height: auto;
+    }
+
+    .cover {
+      position: relative;
+      width: min(1220px, 100%);
+      overflow: hidden;
+      border-radius: 34px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.95)),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.06));
+      border: 1px solid rgba(255, 255, 255, 0.82);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero {
+      position: relative;
+      padding: 24px 26px;
+      background: linear-gradient(140deg, rgba(10, 35, 62, 0.96), rgba(37, 99, 235, 0.9));
+      color: #f8fbff;
+      z-index: 1;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -80px;
+      top: -90px;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.22), transparent 64%);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.10);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 16px;
+      align-items: end;
+      margin-top: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      font-family: "Source Han Serif SC", "Noto Serif SC", "Songti SC", serif;
+    }
+
+    h1 {
+      margin-top: 14px;
+      font-size: clamp(30px, 4vw, 54px);
+      line-height: 1.08;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+
+    .lead {
+      margin-top: 14px;
+      max-width: 760px;
+      color: rgba(248, 251, 255, 0.84);
+      font-size: 15px;
+      line-height: 1.72;
+    }
+
+    .slogan-box {
+      margin-top: 16px;
+      padding: 18px 20px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .slogan-box strong {
+      display: block;
+      font-size: clamp(24px, 3vw, 34px);
+      line-height: 1.2;
+      color: #ffffff;
+    }
+
+    .slogan-box p {
+      margin: 10px 0 0;
+      color: rgba(248, 251, 255, 0.82);
+      font-size: 14px;
+      line-height: 1.72;
+    }
+
+    .hero-side {
+      padding: 20px 18px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hero-side h2 {
+      font-size: 26px;
+      line-height: 1.24;
+    }
+
+    .hero-side p {
+      margin: 10px 0 0;
+      color: rgba(248, 251, 255, 0.82);
+      font-size: 14px;
+      line-height: 1.68;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .hero-tags span {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      font-size: 12px;
+      color: rgba(248, 251, 255, 0.9);
+    }
+
+    .body {
+      position: relative;
+      padding: 20px 24px 24px;
+      z-index: 1;
+    }
+
+    .action-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .action-card {
+      display: flex;
+      flex-direction: column;
+      padding: 18px;
+      border-radius: 22px;
+      text-decoration: none;
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(219, 228, 240, 0.92);
+      box-shadow: 0 14px 34px rgba(23, 34, 51, 0.06);
+      min-height: 194px;
+      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+    }
+
+    .action-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 40px rgba(23, 34, 51, 0.10);
+    }
+
+    .action-card b {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+
+    .action-card h3 {
+      font-size: 22px;
+      line-height: 1.28;
+      margin-bottom: 10px;
+    }
+
+    .action-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.66;
+    }
+
+    .action-card .hint {
+      margin-top: auto;
+      padding-top: 12px;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .action-card.report {
+      background: linear-gradient(180deg, rgba(239, 246, 255, 0.98), rgba(255, 255, 255, 0.92));
+      border-color: rgba(96, 165, 250, 0.42);
+      box-shadow: 0 14px 34px rgba(37, 99, 235, 0.08);
+    }
+
+    .action-card.quick {
+      background: linear-gradient(180deg, rgba(255, 247, 237, 0.98), rgba(255, 255, 255, 0.92));
+      border-color: rgba(251, 191, 36, 0.42);
+      box-shadow: 0 14px 34px rgba(245, 158, 11, 0.08);
+    }
+
+    .action-card.poster {
+      background: linear-gradient(180deg, rgba(240, 253, 244, 0.98), rgba(255, 255, 255, 0.92));
+      border-color: rgba(74, 222, 128, 0.40);
+      box-shadow: 0 14px 34px rgba(34, 197, 94, 0.08);
+    }
+
+    .action-card.readme {
+      background: linear-gradient(180deg, rgba(245, 243, 255, 0.98), rgba(255, 255, 255, 0.92));
+      border-color: rgba(167, 139, 250, 0.42);
+      box-shadow: 0 14px 34px rgba(124, 58, 237, 0.08);
+    }
+
+    .action-card.report .hint { color: #1d4ed8; }
+    .action-card.quick .hint { color: #b45309; }
+    .action-card.poster .hint { color: #15803d; }
+    .action-card.readme .hint { color: #6d28d9; }
+
+    .report b { background: #dbeafe; color: #1d4ed8; }
+    .quick b { background: #fef3c7; color: #b45309; }
+    .poster b { background: #dcfce7; color: #15803d; }
+    .readme b { background: #ede9fe; color: #6d28d9; }
+
+    .bottom-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .panel,
+    .pub-footer {
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(219, 228, 240, 0.92);
+      position: relative;
+      z-index: 1;
+    }
+
+    .panel h2,
+    .pub-footer-head h2 {
+      font-size: 20px;
+      line-height: 1.3;
+      margin-bottom: 10px;
+      color: var(--navy);
+    }
+
+    .panel ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 14px;
+    }
+
+    .pub-footer {
+      margin-top: 14px;
+    }
+
+    .pub-footer-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .pub-stamp {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #e8f1ff;
+      border: 1px solid #d5e5ff;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .pub-caption {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .pub-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .pub-item {
+      padding: 14px;
+      border-radius: 18px;
+      background: #fff;
+      border: 1px solid #e2ebf7;
+    }
+
+    .pub-item b {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+
+    .pub-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .meta {
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--muted);
+      position: relative;
+      z-index: 1;
+    }
+
+    code {
+      font-family: Consolas, Monaco, monospace;
+      background: #f2f4f8;
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+
+    @media (max-width: 1120px) {
+      .word { opacity: 0.9; }
+      .action-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hero-grid { grid-template-columns: 1fr; }
+      h1 { white-space: normal; }
+    }
+
+    @media (max-width: 760px) {
+      .shell {
+        padding: 12px;
+      }
+      .cover {
+        border-radius: 24px;
+      }
+      .hero,
+      .body {
+        padding: 18px 16px;
+      }
+      .bottom-grid,
+      .action-grid,
+      .pub-grid {
+        grid-template-columns: 1fr;
+      }
+      h1 {
+        font-size: clamp(30px, 9vw, 42px);
+        white-space: normal;
+      }
+      .lead {
+        font-size: 14px;
+      }
+      .action-card {
+        min-height: auto;
+      }
+      .luggage-outline svg {
+        width: 92vw;
+      }
+      .word {
+        opacity: 0.72;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="word-cloud" aria-hidden="true">
+      <span class="word strong blue w1">春秋航空</span>
+      <span class="word soft w2">手提尺寸</span>
+      <span class="word strong gold w3">中国联合航空</span>
+      <span class="word soft w4">登机口补价</span>
+      <span class="word strong w5">天津航空</span>
+      <span class="word strong blue w6">西部航空</span>
+      <span class="word soft w7">低价票</span>
+      <span class="word strong gold w8">祥鹏航空</span>
+      <span class="word strong w9">长安航空</span>
+      <span class="word soft w10">托运行李</span>
+      <span class="word soft w11">行李规则</span>
+      <span class="word strong blue w12">九元航空</span>
+      <span class="word soft w13">20 寸登机箱</span>
+      <span class="word soft w14">差异化服务</span>
+      <span class="word soft w15">免费手提</span>
+      <span class="word strong gold w16">航空刺客</span>
+      <span class="word soft w17">最低价票</span>
+      <span class="word strong blue w18">补价风险</span>
+      <span class="word soft w19">值机前确认</span>
+      <span class="word soft w20">托运额</span>
+    </div>
+
+    <div class="luggage-outline" aria-hidden="true">
+      <svg viewBox="0 0 760 560" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="170" y="86" width="420" height="386" rx="48" stroke="rgba(37,99,235,0.30)" stroke-width="10" />
+        <path d="M294 88V56C294 35.0132 311.013 18 332 18H428C448.987 18 466 35.0132 466 56V88" stroke="rgba(15,39,68,0.24)" stroke-width="10" />
+        <path d="M250 174H510" stroke="rgba(245,158,11,0.18)" stroke-width="10" stroke-linecap="round" />
+        <path d="M250 244H510" stroke="rgba(37,99,235,0.14)" stroke-width="10" stroke-linecap="round" />
+        <path d="M250 314H460" stroke="rgba(15,39,68,0.12)" stroke-width="10" stroke-linecap="round" />
+        <circle cx="256" cy="492" r="18" stroke="rgba(15,39,68,0.18)" stroke-width="10" />
+        <circle cx="504" cy="492" r="18" stroke="rgba(15,39,68,0.18)" stroke-width="10" />
+        <path d="M380 112V430" stroke="rgba(15,39,68,0.10)" stroke-width="8" stroke-linecap="round" />
+      </svg>
+    </div>
+
+    <section class="cover">
+      <header class="hero">
+        <span class="eyebrow">Airplane / Cover / 2026-06</span>
+        <div class="hero-grid">
+          <div>
+            <h1>中国低成本航空行李专题</h1>
+            <p class="lead">看懂低成本航空的行李规则，从这里开始。这里不是帮你背整套条款，而是把最容易吃亏的地方先拎出来：托运行李、手提尺寸、以及登机口补价。</p>
+            <div class="slogan-box">
+              <strong>看懂规则，不做低价票补价受害者。</strong>
+              <p>很多补价悲剧，不是票买错了，而是没看清规则。这个专题就是为了尽量减少这种“航空刺客”式袭击。</p>
+            </div>
+          </div>
+          <aside class="hero-side">
+            <h2>先把最容易被忽略的几刀看明白</h2>
+            <p>低价票最常见的问题，不是票价本身，而是行李规则写得不显眼：托运额、手提尺寸、登机口补价，往往都是出发前才发现已经晚了。</p>
+            <div class="hero-tags">
+              <span>完整版报告</span>
+              <span>极简速查页</span>
+              <span>单页海报版</span>
+            </div>
+          </aside>
+        </div>
+      </header>
+
+      <div class="body">
+        <section class="action-grid">
+          <a class="action-card report" href="china-lcc-baggage-report.html">
+            <b>完整版报告</b>
+            <h3>系统看完整规则</h3>
+            <p>包含执行摘要、风险矩阵、天津航空单列、逐家规则摘要和来源说明，适合认真核对。</p>
+            <span class="hint">直接看完整版报告</span>
+          </a>
+          <a class="action-card quick" href="lowest-fare-baggage-cheatsheet.html">
+            <b>极简速查</b>
+            <h3>买票前 30 秒扫一眼</h3>
+            <p>重点看默认托运、20 寸箱、关键价格数字和最快判断法，适合赶时间时直接用。</p>
+            <span class="hint">直接看极简速查页</span>
+          </a>
+          <a class="action-card poster" href="china-lcc-baggage-poster.html">
+            <b>海报版</b>
+            <h3>适合截图、打印、转发</h3>
+            <p>重点数字更大，版式更紧，适合发群、发朋友、做一页式展示或纸面打印。</p>
+            <span class="hint">直接看海报版</span>
+          </a>
+        </section>
+
+        <section class="bottom-grid">
+          <div class="panel">
+            <h2>这套专题覆盖什么</h2>
+            <ul>
+              <li>春秋航空、中国联合航空、天津航空、西部航空、祥鹏航空、长安航空、九元航空</li>
+              <li>重点聚焦最低价票最容易踩坑的 3 类问题：托运额、手提尺寸、现场补价</li>
+              <li>适合作为普通乘客出发前的公开参考材料</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h2>如果你想先理解项目</h2>
+            <ul>
+              <li><code>README.md</code>：项目说明、收录口径、页面结构、方法说明</li>
+              <li><code>china-lcc-baggage-report.html</code>：完整版报告</li>
+              <li><code>lowest-fare-baggage-cheatsheet.html</code>：极简速查页</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="pub-footer">
+          <div class="pub-footer-head">
+            <h2>报告信息</h2>
+            <span class="pub-stamp">Publication Note</span>
+          </div>
+          <p class="pub-caption">文档编号：AIRPLANE-CN-LCC-COVER-2026.06 · 版本：v1.1 · 主题：中国低成本航空</p>
+          <div class="pub-grid">
+            <div class="pub-item">
+              <b>制作日期</b>
+              <p>2026-06-22（Asia/Shanghai）</p>
+            </div>
+            <div class="pub-item">
+              <b>免责声明</b>
+              <p>本页为专题封面与导航页，用于帮助乘客快速进入对应内容，不替代具体航班的出票页、值机页和航司最新行李规则。实际免费额度、加购价格和适用条件，请以下单页与航司公告为准。</p>
+            </div>
+            <div class="pub-item">
+              <b>生成模型</b>
+              <p>gpt5.4</p>
+            </div>
+          </div>
+        </section>
+
+        <div class="meta">推荐先看：<code>china-lcc-baggage-report.html</code></div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
